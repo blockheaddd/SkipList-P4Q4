@@ -10,8 +10,7 @@ public class Tester {
     {
         Dictionary<Integer, Integer> dict = new SkipList();
         dict.insert(7, 7);
-        dict.print();
-        dict.insert(8,8);
+        dict.insert(8, 8);
         dict.insert(2,2);
         dict.insert(10,10);
         dict.insert(50,50);
@@ -22,6 +21,8 @@ public class Tester {
         dict.print();
         dict.removeAny();
         dict.print();
+
+        System.out.println("Searching for 7. Returned: " + dict.find(7));
 
     }
 }
