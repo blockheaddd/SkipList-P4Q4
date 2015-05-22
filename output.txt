@@ -1,0 +1,5 @@
+2   7   8   10   21   50
+REMOVING: 10
+2   7   8   21   50
+(Remove Any) Removing: 50
+2   7   8   21
