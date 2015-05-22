@@ -10,13 +10,13 @@ public class Tester {
     {
         Dictionary<Integer, Integer> dict = new SkipList();
         dict.insert(7, 7);
+        dict.print();
         dict.insert(8,8);
         dict.insert(2,2);
         dict.insert(10,10);
         dict.insert(50,50);
         dict.insert(21,21);
 
-        System.out.println("Dictionary Size: " + dict.size());
         dict.print();
         dict.remove(10);
         dict.print();
