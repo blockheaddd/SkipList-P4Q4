@@ -16,6 +16,7 @@ public class Tester {
         dict.insert(50,50);
         dict.insert(21,21);
 
+        System.out.println("Dictionary Size: " + dict.size());
         dict.print();
         dict.remove(10);
         dict.print();

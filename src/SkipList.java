@@ -1,8 +1,15 @@
+/** SkipList.java
+ *
+ * By: Gus Silva and Anil Jethani
+ *
+ * Some code is from "A Practical Introduction to Data
+ * Structures and Algorithm Analysis, 3rd Edition (Java)"
+ * by Clifford A. Shaffer
+ * Copyright 2008-2011 by Clifford A. Shaffer
+ */
+
 import java.util.Random;
 
-/**
- * Created by GusSilva on 5/19/15.
- */
 public class SkipList<Key extends Comparable<? super Key>, E> implements Dictionary<Key, E> {
 
     private SkipNode<Key,E> head;
@@ -35,14 +42,13 @@ public class SkipList<Key extends Comparable<? super Key>, E> implements Diction
             }
             update[i] = temp;
         }
-
+        System.out.println("Inserting: " + k + "  |  after:  " + temp.element());
         temp = new SkipNode<>(k,e,newLevel);
         for(int i=0; i <= newLevel; i++)
         {
             temp.forward[i] = update[i].forward[i];
             update[i].forward[i] = temp;
         }
-
         size++;
     }
 
@@ -79,9 +85,16 @@ public class SkipList<Key extends Comparable<? super Key>, E> implements Diction
         }//Not Found
     }
 
+
+    /**
+     * Since remove any is a function to remove an
+     * arbitrary element, we have implemented it
+     * to remove the last node for efficiency
+     * and simplicity
+     * @return - the removed nodes element
+     */
     @Override
     public E removeAny() {
-        //Remove random term
         SkipNode<Key,E> temp = head;
         E returnElem = null;
         while(temp.forward[0].forward[0] != null)
@@ -125,7 +138,7 @@ public class SkipList<Key extends Comparable<? super Key>, E> implements Diction
     }
 
 
-    //Function to adjust head nodes height
+    /** Function to adjust head nodes height */
     private void adjustHead(int newHeight)
     {
         SkipNode<Key,E> temp = head;    //
@@ -145,6 +158,7 @@ public class SkipList<Key extends Comparable<? super Key>, E> implements Diction
         return lev;
     }
 
+    /** Function to print the list */
     public void print()
     {
         SkipNode<Key, E> temp = head;
@@ -155,7 +169,4 @@ public class SkipList<Key extends Comparable<? super Key>, E> implements Diction
         }
         System.out.println();
     }
-
-
-
 }
