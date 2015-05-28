@@ -17,7 +17,7 @@ public class Tester {
         dict.insert(21,21);
 
         dict.print();
-        dict.remove(10);
+        System.out.println("REMOVED: " + dict.remove(10));
         dict.print();
         dict.removeAny();
         dict.print();
