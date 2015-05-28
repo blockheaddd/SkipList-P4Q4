@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Random;
+
 /** SkipList.java
  * By: Gus Silva and Anil Jethani
  *
@@ -10,6 +13,7 @@
 class SkipList<Key extends Comparable<? super Key>, E>
          implements Dictionary<Key, E> {
     private SkipNode<Key,E> head;
+    private ArrayList<Key> keys = new ArrayList<>();
     private int level;
     private int size;
 
@@ -60,7 +64,10 @@ class SkipList<Key extends Comparable<? super Key>, E>
                 }
             }
             if(returnElem != null) //Once Node has been removed return
+            {
+                size--;
                 return returnElem;
+            }
             temp = temp.forward[0]; //Else continue
         }
         return null; //Key not found
@@ -74,21 +81,8 @@ class SkipList<Key extends Comparable<? super Key>, E>
      * @return - the removed nodes element
      */
     public E removeAny() {
-        SkipNode<Key,E> temp = head;
-        E returnElem = null;
-        while(temp.forward[0].forward[0] != null)
-            temp = temp.forward[0];
-
-        returnElem = temp.forward[0].element();
-
-        System.out.println("(Remove Any) Removing: " + returnElem);
-
-        for(int i=0; i < temp.level(); i++)
-            temp.forward[i] = null;
-
-        size--; //Reduce Size
-
-        return returnElem;
+        int randomKey = Math.abs(new Random().nextInt(size));
+        return remove(keys.get(randomKey));
     }
 
     /** Function to clear the list */
@@ -125,6 +119,7 @@ class SkipList<Key extends Comparable<? super Key>, E>
         x.forward[i] = update[i].forward[i]; // Who x points to
         update[i].forward[i] = x;            // Who y points to
       }
+      keys.add(k);                  //Add new key to keys array
       size++;                       // Increment dictionary size
     }
 
