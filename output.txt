@@ -1,8 +1,24 @@
-SkipList Sample Output:
+SkipList Sample Outputs:
 
 2   7   8   10   21   50
 REMOVED: 10
 2   7   8   21   50   
 REMOVED (any) : 2
 7   8   21   50   
+Searching for 7. Returned: 7
+
+
+2   7   8   10   21   50
+REMOVED: 10
+2   7   8   21   50
+REMOVED (any) : 7
+2   8   21   50
+Searching for 7. Returned: null
+
+
+2   7   8   10   21   50
+REMOVED: 10
+2   7   8   10   21   50
+REMOVED (any) : 21
+2   7   8   10   50
 Searching for 7. Returned: 7

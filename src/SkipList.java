@@ -48,13 +48,20 @@ class SkipList<Key extends Comparable<? super Key>, E>
     public E remove(Key k) {
         SkipNode<Key, E> temp = head;
         E returnElem = null;
+        int currLevel = 0;
+        int targetLevel = Integer.MAX_VALUE;
 
-        while(temp.forward[0] != null) //loop through each node
+        while(temp != null && temp.forward[0] != null && (currLevel < targetLevel)) //loop through each node
         {
-            for(int j =0; j < temp.level(); j++) //loop through each level of each node
+            for(int j = 0; j < temp.level(); j++) //loop through each level of current node
             {
-                if((temp.forward[j] != null) && (temp.forward[j].key().compareTo(k) == 0)) //If forward is the target node
+                if((temp.forward[j] != null) &&
+                        (temp.forward[j].key().compareTo(k) == 0)) //If forward is the target node
                 {
+                    //Set Target Level if not set already
+                    if(targetLevel == Integer.MAX_VALUE)
+                        targetLevel = temp.forward[j].level();
+
                     //Set return element if not set already
                     if(returnElem == null)
                         returnElem = temp.forward[j].element();
@@ -63,14 +70,17 @@ class SkipList<Key extends Comparable<? super Key>, E>
                     temp.forward[j] = temp.forward[j].forward[j];
                 }
             }
-            if(returnElem != null) //Once Node has been removed return
-            {
-                size--;
-                return returnElem;
-            }
-            temp = temp.forward[0]; //Else continue
+            temp = temp.forward[0]; //Move to next node
+
         }
-        return null; //Key not found
+        if(returnElem != null)  //Key was found and removed
+        {
+            size--;
+            keys.remove(k);
+            return returnElem;
+        }
+        else                    //Key not found
+            return null;
     }
 
     /**
